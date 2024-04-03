@@ -10,6 +10,9 @@ import { AtomsModule } from './modules/atoms.module';
 
 import { SidenavComponent } from './components/organisms/sidenav/sidenav.component';
 import { SidenavLinkComponent } from './components/molecules/sidenav-link/sidenav-link.component';
+import { DragDropColumnComponent } from './components/atoms/drag-drop-column/drag-drop-column.component';
+import { TaskCardComponent } from './components/molecules/task-card/task-card.component';
+import { BoardTasksListComponent } from './components/organisms/board-tasks-list/board-tasks-list.component';
 
 
 @NgModule({
@@ -17,6 +20,9 @@ import { SidenavLinkComponent } from './components/molecules/sidenav-link/sidena
     AppComponent,
     SidenavComponent,
     SidenavLinkComponent,
+    DragDropColumnComponent,
+    TaskCardComponent,
+    BoardTasksListComponent,
   ],
   imports: [
     BrowserModule,
