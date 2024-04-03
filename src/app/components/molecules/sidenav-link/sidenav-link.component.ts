@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MenuItem } from '../../../models/menuItem.model';
 
 @Component({
   selector: 'app-sidenav-link',
@@ -7,14 +8,11 @@ import { Component, Input } from '@angular/core';
 })
 export class SidenavLinkComponent {
   @Input()
-  displayText?: string;
+  menuItemData: MenuItem;
 
-  @Input()
-  materialIconKey?: string;
+  @Output() menuItemClickEvent = new EventEmitter<string>();
 
-  @Input()
-  routerLink?: string;
-
-  @Input()
-  routerLinkActiveOptions: { exact: boolean } = { exact: false };
-}
+  emitItemClicked() {
+      this.menuItemClickEvent.emit();
+    }
+  }

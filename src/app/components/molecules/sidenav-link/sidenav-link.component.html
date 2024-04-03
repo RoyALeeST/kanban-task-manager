@@ -1,15 +1,6 @@
-<a
-  [routerLink]="routerLink"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="routerLinkActiveOptions"
->
-  <!-- Wrapping icon and text with spans to make text truncation work -->
-  <span>
-    <mat-icon mat-list-icon>{{materialIconKey}}</mat-icon>
-    <ng-content></ng-content>
-  </span>
-
-  <span class="text-container">
-    {{displayText}}
-  </span>
-</a>
+<ng-container *ngIf="menuItemData">
+  <a [ngClass]="{'menu-button': menuItemData.menuItemType != 0}" (click)="emitItemClicked()">
+    <app-menu-item-icon [materialIconKey]="menuItemData.menuItemIcon"></app-menu-item-icon>
+    <app-menu-items-text [displayText]="menuItemData.boardTitle"></app-menu-items-text>
+  </a>
+</ng-container>

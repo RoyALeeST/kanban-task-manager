@@ -4,22 +4,18 @@ a {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 4px;
     min-width: 200px;
-    padding: 16px;
+    width: 100%;
+    padding: 10px;
     box-sizing: border-box;
     text-decoration: none;
     color: grey;
-    border-radius: 4px;
     transition: background-color 75ms ease-out;
     cursor: pointer;
-  
-    // change overflowing text to ellipsis
-    .text-container {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+    border-radius: 0px 40px 40px 0px;
+
+
   
     &:hover {
       background-color: #5a55b9;
@@ -31,4 +27,11 @@ a {
       font-weight: bold;
       color: white;
     }
+  }
+  .menu-button{
+    color: rgb(101, 96, 175);
+
+  }
+  :host{
+    width: 100%;
   }
