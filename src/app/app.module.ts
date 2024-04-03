@@ -6,20 +6,24 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { MaterialModule } from './modules/material.module';
+import { AtomsModule } from './modules/atoms.module';
+
 import { SidenavComponent } from './components/organisms/sidenav/sidenav.component';
 import { SidenavLinkComponent } from './components/molecules/sidenav-link/sidenav-link.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
-    SidenavLinkComponent
+    SidenavLinkComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    AtomsModule
   ],
   exports:[
     SidenavComponent,

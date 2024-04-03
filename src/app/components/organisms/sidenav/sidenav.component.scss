@@ -6,20 +6,22 @@
     top: 0;
     background-color: #23232d;
     border-right: 1px solid rgb(77, 77, 77);
-  }
-
-  .sidenav-title{
-    display: flex;
-    justify-content: flex-start ;
-    align-items: center;
-    padding: 0px 1rem;
-    color: white;
-  }
-
-  .sidenav-subtitle{
-    display: flex;
-    justify-content: flex-start ;
-    align-items: center;
-    padding: 0px 1rem;
     color: grey;
+  }
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    align-items: flex-start;
+    padding: 0px 1rem;
+
+    .sidenav-title-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: center ;
+      align-items: center;
+      color: white;
+      padding: 0px 1rem;
+    }
   }

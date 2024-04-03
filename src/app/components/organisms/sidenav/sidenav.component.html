@@ -1,7 +1,16 @@
-<div>
-    <h1 class="sidenav-title">Kanban</h1>
-  
-    <h5 class="sidenav-subtitle">ALL BOARDS ( 3 )</h5>
-    <app-sidenav-link [materialIconKey]="'home'" [displayText]="'Home'">
-    </app-sidenav-link>
+<div class="container">
+    <span class="sidenav-title-container">  
+        <app-menu-item-icon [materialIconKey]="'calendar_view_week'"></app-menu-item-icon>
+        <app-title-text [displayText]="'Kanban'"></app-title-text>
+    </span>
+    <span class="subtitle-text">
+        <app-menu-items-text [displayText]="sidenavSubtitle"></app-menu-items-text>
+    </span>
+
+    <ng-container *ngFor="let menuItem of menuItems; let i = index">    
+        <app-sidenav-link 
+            [menuItemData]="menuItem" 
+            (menuItemClickEvent)="handleMenuItemClick(i)">
+        </app-sidenav-link>
+    </ng-container>
   </div>
