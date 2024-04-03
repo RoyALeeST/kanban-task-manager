@@ -1,0 +1,15 @@
+<a
+  [routerLink]="routerLink"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="routerLinkActiveOptions"
+>
+  <!-- Wrapping icon and text with spans to make text truncation work -->
+  <span>
+    <mat-icon mat-list-icon>{{materialIconKey}}</mat-icon>
+    <ng-content></ng-content>
+  </span>
+
+  <span class="text-container">
+    {{displayText}}
+  </span>
+</a>

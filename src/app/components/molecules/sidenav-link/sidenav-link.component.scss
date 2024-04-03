@@ -1,0 +1,34 @@
+a {
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    min-width: 200px;
+    padding: 16px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: grey;
+    border-radius: 4px;
+    transition: background-color 75ms ease-out;
+    cursor: pointer;
+  
+    // change overflowing text to ellipsis
+    .text-container {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  
+    &:hover {
+      background-color: #5a55b9;
+      color: white;
+    }
+  
+    &.active {
+      background-color: #5a55b9;
+      font-weight: bold;
+      color: white;
+    }
+  }
