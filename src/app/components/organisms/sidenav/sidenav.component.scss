@@ -1,0 +1,25 @@
+:host {
+    height: 100vh;
+    width: var(--sidenav-width);
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    background-color: #23232d;
+    border-right: 1px solid rgb(77, 77, 77);
+  }
+
+  .sidenav-title{
+    display: flex;
+    justify-content: flex-start ;
+    align-items: center;
+    padding: 0px 1rem;
+    color: white;
+  }
+
+  .sidenav-subtitle{
+    display: flex;
+    justify-content: flex-start ;
+    align-items: center;
+    padding: 0px 1rem;
+    color: grey;
+  }
