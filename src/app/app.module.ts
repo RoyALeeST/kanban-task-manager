@@ -21,6 +21,9 @@ import { TaskDetailsDialogComponent } from './components/molecules/dialogs/task-
 import { InputComponent } from './components/atoms/input/input.component';
 import { InputDropdownComponent } from './components/atoms/input-dropdown/input-dropdown.component';
 import { InputTextAreaComponent } from './components/atoms/input-text-area/input-text-area.component';
+import { InputCheckboxComponent } from './components/atoms/input-checkbox/input-checkbox.component';
+import { TaskDetailsStatusTogglerComponent } from './components/molecules/task-details-status-toggler/task-details-status-toggler.component';
+import { TaskDetailsDescriptionComponent } from './components/atoms/task-details-description/task-details-description.component';
 
 
 @NgModule({
@@ -39,6 +42,9 @@ import { InputTextAreaComponent } from './components/atoms/input-text-area/input
     InputComponent,
     InputDropdownComponent,
     InputTextAreaComponent,
+    InputCheckboxComponent,
+    TaskDetailsStatusTogglerComponent,
+    TaskDetailsDescriptionComponent,
   ],
   imports: [
     BrowserModule,
