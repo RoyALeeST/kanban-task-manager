@@ -13,7 +13,7 @@ export class SidenavService {
     currentBoards.push({boardTitle: 'Title3', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
     currentBoards.push({boardTitle: 'Title4', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
     currentBoards.push({boardTitle: 'Title5', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
-    currentBoards.push({boardTitle: '+Create New Task', menuItemIcon: 'table_chart', menuItemType: MenuItemType.NEW_BOARD});
+    currentBoards.push({boardTitle: '+Create New Board', menuItemIcon: 'table_chart', menuItemType: MenuItemType.NEW_BOARD});
     return currentBoards;
   }
 

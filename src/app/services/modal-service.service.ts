@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NewTaskDialogComponent } from '../components/molecules/dialogs/new-task-dialog/new-task-dialog.component';
 import { TaskDetailsDialogComponent } from '../components/molecules/dialogs/task-details-dialog/task-details-dialog.component';
 import { Task } from '../models/task.model';
+import { NewBoardDialogComponent } from '../components/molecules/dialogs/new-board-dialog/new-board-dialog.component';
 
 
 @Injectable({
@@ -32,6 +33,15 @@ export class ModalService {
     this.dialogConfig.panelClass = 'app-task-details-dialog';
 
     this.dialogRef = this.dialog.open(TaskDetailsDialogComponent, this.dialogConfig);
+  }
+
+  openNewBoardDialog(){
+    if(this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.dialogConfig.panelClass = 'app-new-board-dialog';
+
+    this.dialogRef = this.dialog.open(NewBoardDialogComponent, this.dialogConfig);
   }
 
   close() {
