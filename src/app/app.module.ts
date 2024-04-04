@@ -13,6 +13,8 @@ import { SidenavLinkComponent } from './components/molecules/sidenav-link/sidena
 import { DragDropColumnComponent } from './components/atoms/drag-drop-column/drag-drop-column.component';
 import { TaskCardComponent } from './components/molecules/task-card/task-card.component';
 import { BoardTasksListComponent } from './components/organisms/board-tasks-list/board-tasks-list.component';
+import { BoardTaskColumnComponent } from './components/organisms/board-task-column/board-task-column.component';
+import { TaskCardTitleComponent } from './components/atoms/task-card-title/task-card-title.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { BoardTasksListComponent } from './components/organisms/board-tasks-list
     DragDropColumnComponent,
     TaskCardComponent,
     BoardTasksListComponent,
+    BoardTaskColumnComponent,
+    TaskCardTitleComponent,
   ],
   imports: [
     BrowserModule,

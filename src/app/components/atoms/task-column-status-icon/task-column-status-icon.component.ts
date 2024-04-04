@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task-column-status-icon',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './task-column-status-icon.component.scss'
 })
 export class TaskColumnStatusIconComponent {
-
+  @Input() columnId: string = '';
 }
