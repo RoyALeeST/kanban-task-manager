@@ -1,0 +1,4 @@
+<select class="kanban-input-dropdown" [formControl]="formControl">
+    <option value="" disabled>Task Status</option>
+    <option *ngFor="let item of dropdownList" [value]="item">{{item}}</option>
+</select>

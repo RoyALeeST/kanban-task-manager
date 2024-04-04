@@ -1,15 +1,42 @@
-<form [formGroup]="form" class="dialog-form">
+<form [formGroup]="newTaskForm" class="dialog-form">
 
     <div mat-dialog-title>
-      Add new Task
+        <app-task-card-title [taskTitle]="'Add New Task'"></app-task-card-title>
     </div>
     <mat-dialog-content>
-  
-      <mat-form-field>
-        <input formControlName="password" matInput placeholder="Task Title" />
-        <mat-error>Invalid task</mat-error>
-      </mat-form-field>
-          
+
+        <div class="form-container">
+            <div class="input-container">
+                <app-task-card-title [taskTitle]="'Title'"></app-task-card-title>
+                <app-input [control]="newTaskForm.controls['taskTitle']"></app-input>
+            </div>
+
+            <div class="input-container">
+                <app-task-card-title [taskTitle]="'Description'"></app-task-card-title>
+                <app-input-text-area [control]="newTaskForm.controls['taskDescription']"></app-input-text-area>
+            </div>
+
+            <div class="input-container">
+                <app-task-card-title [taskTitle]="'Subtasks'"></app-task-card-title>
+                <ng-container *ngIf="subtasks" formArrayName="subtasks">    
+                    <div *ngFor="let subtask of subtasks.controls; let i = index" class="subtask-input-container">
+                        <div [formGroupName]="i" class="subtask-input-item">
+                            <input class="sub-task-input" formControlName="subtaskName" placeholder="Subtask">
+                            <span class="delete-subtask-icon" (click)="popSubtask()"><app-menu-item-icon [materialIconKey]="'close'"></app-menu-item-icon></span>
+                        </div>      
+                    </div>
+                </ng-container>
+                <app-main-button [displayText]="'+Add New Subtask'" (buttonPressedEvent)="addSubtask()"></app-main-button>
+            </div>
+
+            <div class="input-container">
+                <app-task-card-title [taskTitle]="'Status'"></app-task-card-title>
+                <app-input-dropdown [control]="newTaskForm.controls['taskStatus']" [dropdownList]="['Todo','Doing','Done',]"></app-input-dropdown>
+            </div>
+            <div class="input-container">
+                <app-main-button [displayText]="'Create Task'" (buttonPressedEvent)="onSubmit()"></app-main-button>
+            </div>
+        </div>
+
     </mat-dialog-content>
-  
   </form>
