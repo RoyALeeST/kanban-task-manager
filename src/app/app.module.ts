@@ -18,6 +18,9 @@ import { TaskCardTitleComponent } from './components/atoms/task-card-title/task-
 import { NewTaskDialogComponent } from './components/molecules/dialogs/new-task-dialog/new-task-dialog.component';
 import { NewBoardDialogComponent } from './components/molecules/dialogs/new-board-dialog/new-board-dialog.component';
 import { TaskDetailsDialogComponent } from './components/molecules/dialogs/task-details-dialog/task-details-dialog.component';
+import { InputComponent } from './components/atoms/input/input.component';
+import { InputDropdownComponent } from './components/atoms/input-dropdown/input-dropdown.component';
+import { InputTextAreaComponent } from './components/atoms/input-text-area/input-text-area.component';
 
 
 @NgModule({
@@ -33,6 +36,9 @@ import { TaskDetailsDialogComponent } from './components/molecules/dialogs/task-
     NewTaskDialogComponent,
     NewBoardDialogComponent,
     TaskDetailsDialogComponent,
+    InputComponent,
+    InputDropdownComponent,
+    InputTextAreaComponent,
   ],
   imports: [
     BrowserModule,

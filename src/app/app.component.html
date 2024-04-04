@@ -4,7 +4,9 @@
   <div class="header">
     <mat-toolbar class="header">
       <h1 class="example-app-name">Platform Launch</h1>
-      <app-main-button [displayText]="'+Add New Task'" (buttonPressedEvent)="openNewDialogModal()"></app-main-button>
+      <div class="new-task-btn">
+        <app-main-button [displayText]="'+Add New Task'" (buttonPressedEvent)="openNewDialogModal()"></app-main-button>
+      </div>
     </mat-toolbar>  
   </div>
   <router-outlet></router-outlet>

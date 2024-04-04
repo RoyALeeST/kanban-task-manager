@@ -12,6 +12,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CdkTableModule,
     CdkTreeModule,
     MatDialogModule,
+    MatInputModule,
     MatFormFieldModule,
   ],
   exports:[
@@ -42,6 +44,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CdkTableModule,
     CdkTreeModule,
     MatDialogModule,
+    MatInputModule,
     MatFormFieldModule,
   ],
   providers: [],
