@@ -1,1 +1,25 @@
-<p>task-details-dialog works!</p>
+<form [formGroup]="newTaskForm" class="dialog-form">
+
+    <div mat-dialog-title>
+        <app-task-card-title [taskTitle]="selectedTaskData.taskTitle"></app-task-card-title>
+    </div>
+    <mat-dialog-content>
+        <div class="task-description-container">
+            <app-task-details-description [taskDescription]="selectedTaskData.taskDescription"></app-task-details-description>
+        </div>
+        <div class="sub-tasks-status">
+            <div class="subtask-status-container" *ngFor="let subtask of selectedTaskData.subTasksList">
+                <app-task-details-status-toggler [subtask]="subtask"></app-task-details-status-toggler>
+            </div>
+        </div>
+        <div class="form-container">
+            <div class="input-container">
+                <app-task-card-title [taskTitle]="'Status'"></app-task-card-title>
+                <app-input-dropdown [control]="newTaskForm.controls['taskStatus']" 
+                                    [dropdownList]="['Todo','Doing','Done',]"
+                                    (valueSelected)="subtaskStatusSelected($event)"></app-input-dropdown>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+  </form>

@@ -14,6 +14,5 @@ export class AppComponent {
   }
   openNewDialogModal(){
     this._modalService.openNewTaskDialog();
-
   }
 }

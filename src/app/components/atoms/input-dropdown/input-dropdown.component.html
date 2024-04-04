@@ -1,4 +1,8 @@
-<select class="kanban-input-dropdown" [formControl]="formControl">
-    <option value="" disabled>Task Status</option>
-    <option *ngFor="let item of dropdownList" [value]="item">{{item}}</option>
-</select>
+<div class="select">
+    <select #mySelect class="kanban-input-dropdown" [formControl]="formControl" (change)='onOptionsSelected(mySelect.value)'>
+        <option value="" disabled>Task Status</option>
+        <option *ngFor="let item of dropdownList" [value]="item">{{item}}</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>

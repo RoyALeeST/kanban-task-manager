@@ -10,3 +10,11 @@
     gap: 10px;
     padding: 1rem;
 }
+
+.task-card{
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: baseline;
+    align-items: flex-start;
+}

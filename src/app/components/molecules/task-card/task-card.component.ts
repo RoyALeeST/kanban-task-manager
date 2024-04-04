@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Task } from '../../../models/task.model';
+import { ModalService } from '../../../services/modal-service.service';
 
 @Component({
   selector: 'app-task-card',
@@ -8,8 +9,9 @@ import { Task } from '../../../models/task.model';
 })
 export class TaskCardComponent {
   @Input() task: Task;
+  constructor(private _modalService: ModalService){}
 
   showTaskDetails(){
-    console.log(this.task)
+    this._modalService.openTaskDetailsDialog(this.task);
   }
 }
