@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule  }  from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -15,6 +15,9 @@ import { TaskCardComponent } from './components/molecules/task-card/task-card.co
 import { BoardTasksListComponent } from './components/organisms/board-tasks-list/board-tasks-list.component';
 import { BoardTaskColumnComponent } from './components/organisms/board-task-column/board-task-column.component';
 import { TaskCardTitleComponent } from './components/atoms/task-card-title/task-card-title.component';
+import { NewTaskDialogComponent } from './components/molecules/dialogs/new-task-dialog/new-task-dialog.component';
+import { NewBoardDialogComponent } from './components/molecules/dialogs/new-board-dialog/new-board-dialog.component';
+import { TaskDetailsDialogComponent } from './components/molecules/dialogs/task-details-dialog/task-details-dialog.component';
 
 
 @NgModule({
@@ -27,11 +30,15 @@ import { TaskCardTitleComponent } from './components/atoms/task-card-title/task-
     BoardTasksListComponent,
     BoardTaskColumnComponent,
     TaskCardTitleComponent,
+    NewTaskDialogComponent,
+    NewBoardDialogComponent,
+    TaskDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     AtomsModule
   ],

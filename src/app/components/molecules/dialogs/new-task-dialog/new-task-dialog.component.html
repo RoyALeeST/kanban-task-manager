@@ -1,0 +1,15 @@
+<form [formGroup]="form" class="dialog-form">
+
+    <div mat-dialog-title>
+      Add new Task
+    </div>
+    <mat-dialog-content>
+  
+      <mat-form-field>
+        <input formControlName="password" matInput placeholder="Task Title" />
+        <mat-error>Invalid task</mat-error>
+      </mat-form-field>
+          
+    </mat-dialog-content>
+  
+  </form>

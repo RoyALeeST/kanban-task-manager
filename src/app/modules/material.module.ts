@@ -10,14 +10,14 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
@@ -26,11 +26,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCheckboxModule,
     DragDropModule,
     CdkTableModule,
-    CdkTreeModule
+    CdkTreeModule,
+    MatDialogModule,
+    MatFormFieldModule,
   ],
   exports:[
     BrowserModule,
-    BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
@@ -39,7 +40,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCheckboxModule,
     DragDropModule,
     CdkTableModule,
-    CdkTreeModule
+    CdkTreeModule,
+    MatDialogModule,
+    MatFormFieldModule,
   ],
   providers: [],
 })
