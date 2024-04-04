@@ -1,17 +1,19 @@
 <div class="tasks-container">
     <span class="column-title">
-        <app-task-column-status-icon></app-task-column-status-icon>
+        <app-task-column-status-icon [columnId]="columnId"></app-task-column-status-icon>
         <app-menu-items-text [displayText]="columnTitle"></app-menu-items-text>
     </span>
 
-	<div    cdkDropList 
-            id={{columnId}} 
-            [cdkDropListData]="tasksList" 
-            [cdkDropListConnectedTo]="['todoList','doingList', 'doneList']" 
-            class="tasks-list"
-            (cdkDropListDropped)="drop($event)">
-    <div class="task-box" *ngFor="let task of tasksList" cdkDrag>
-        <app-task-card [task]="task"></app-task-card>
-    </div>
-	</div>
+
+</div>
+
+<div cdkDropList 
+     id={{columnId}} 
+     [cdkDropListData]="tasksList" 
+     [cdkDropListConnectedTo]="['todoList','doingList', 'doneList']" 
+     class="tasks-list"
+     (cdkDropListDropped)="drop($event)">
+        <div class="task-box" *ngFor="let task of tasksList" cdkDrag>
+            <app-task-card [task]="task"></app-task-card>
+        </div>
 </div>

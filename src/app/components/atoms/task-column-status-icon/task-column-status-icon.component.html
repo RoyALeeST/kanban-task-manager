@@ -1,1 +1,1 @@
-<span class="dot"></span>
+<span class="dot" [ngClass]="{'todo': columnId === 'todoList', 'doing' : columnId === 'doingList', 'done' : columnId === 'doneList' }"></span>

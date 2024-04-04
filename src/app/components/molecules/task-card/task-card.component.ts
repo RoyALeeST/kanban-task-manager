@@ -8,4 +8,8 @@ import { Task } from '../../../models/task.model';
 })
 export class TaskCardComponent {
   @Input() task: Task;
+
+  showTaskDetails(){
+    console.log(this.task)
+  }
 }
