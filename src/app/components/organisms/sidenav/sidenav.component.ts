@@ -1,35 +1,71 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { SidenavService } from '../../../services/sidenav.service';
-import { MenuItem } from '../../../models/menuItem.model';
+import { MenuItem, MenuItemType } from '../../../models/menuItem.model';
 import { ModalService } from '../../../services/modal-service.service';
+import { Store, select } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
+import { selectAllMenuItems } from '../../../states/selectors/menu.selector'
+import { selectAllBoards } from '../../../states/selectors/board.selector'
+
+import { MenuState } from '../../../states/reducers/menu.reducer';
+import { BoardsState } from '../../../states/reducers/board.reducer';
+import { BoardService } from '../../../services/boards.service';
+import { Board } from '../../../models/board.model';
+
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
-export class SidenavComponent {
-  menuItems: MenuItem[];
+export class SidenavComponent implements OnDestroy{
+
+  menuItems: MenuItem[] = [];
+  boardsMenuItems: MenuItem[] = [];
+
   sidenavSubtitle: string = '';
   selectedMenuItem: MenuItem;
+  readonly newBoardMenuItemButton: MenuItem = {boardTitle: '+Create New Board', menuItemIcon: 'table_chart', menuItemType: MenuItemType.NEW_BOARD} // last item in menu, this is the button to add a new board
+  unsubscribe: Subject<void> = new Subject(); // Subject for unsubscribing when component gets destroyed
 
-  constructor(public sidenavService: SidenavService, 
-              private _modalService: ModalService) {
-    this.menuItems = this.sidenavService.getCreatedBoards();
-    this.selectedMenuItem = this.menuItems[0]; // Allways preselect first board, if none exist, preselected baord will be the new tast button
-    this.sidenavSubtitle = `ALL BOARDS (${this.menuItems.length})`  
+
+  constructor(private sidenavService: SidenavService, 
+              private _boardService: BoardService, 
+              private store: Store<{ menuState: MenuState, boardState: BoardsState }>,
+              private _modalService: ModalService) 
+  {
+    this.updateBoardCountText(); 
+    this.boardsMenuItems = this.sidenavService.loadBoardsMenuItems();
+    this.menuItems = this.boardsMenuItems.concat([this.newBoardMenuItemButton])
+
+    this.store.pipe(select(selectAllMenuItems))
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe({
+      next: (menuItems: MenuItem[])=>{
+        this.sidenavService.saveMenuItems(menuItems);
+        this.boardsMenuItems = menuItems;
+        this.menuItems = this.boardsMenuItems.concat([this.newBoardMenuItemButton]);      
+        this.updateBoardCountText(); 
+      }
+    });
   }
 
   handleMenuItemClick(clickedIndex: number){
-    //TODO: Add new Board to boards list
     this.selectedMenuItem = this.menuItems[clickedIndex];
-    console.log(clickedIndex)
     if(clickedIndex == this.menuItems.length - 1){ // If new board button clicked open dialog
       this._modalService.openNewBoardDialog();
-
     } else { // get tasks for board
-      console.log(this.sidenavService.getSelectedBoardTasks())
+      this._boardService.loadBoard(this.selectedMenuItem.boardTitle);
     }
   }
 
+  updateBoardCountText(){
+    this.sidenavSubtitle = `ALL BOARDS (${this.boardsMenuItems.length})`  
+
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 }

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../../../models/task.model';
+import { TaskService } from '../../../../services/task.service';
+import { Store } from '@ngrx/store';
+import { ModalService } from '../../../../services/modal-service.service';
+import { AddToDoTaskToBoard } from '../../../../states/actions/board.actions';
 
 @Component({
   selector: 'app-new-task-dialog',
@@ -11,7 +15,11 @@ export class NewTaskDialogComponent {
   newTaskForm: FormGroup;
   subtasksForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private _modalService: ModalService,
+              private _taskService: TaskService,
+              private store: Store<any>
+              ) {
     this.newTaskForm = fb.group({
       taskTitle: ['', [Validators.required]],
       taskDescription: ['', [Validators.required]],
@@ -31,7 +39,6 @@ export class NewTaskDialogComponent {
   }
 
   popSubtask(){
-    console.log('sadadasdadas')
     this.subtasks.removeAt(this.subtasks.length - 1)
   }
 
@@ -41,6 +48,16 @@ export class NewTaskDialogComponent {
     }
 
   onSubmit() {
-    console.log(this.newTaskForm.value);
+    if (this.newTaskForm.invalid) {
+      return;
+    }
+    let newTask: Task = this.newTaskForm.value;
+    console.log(newTask)
+
+    this._modalService.close();
+    // this.store.dispatch(AddToDoTaskToBoard());
+
   }
+
+
 }

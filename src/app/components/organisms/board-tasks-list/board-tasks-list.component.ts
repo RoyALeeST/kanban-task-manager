@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { Task } from '../../../models/task.model';
+import { select, Store } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
+import { BoardService } from '../../../services/boards.service';
+import { MenuState } from '../../../states/reducers/menu.reducer';
+import { BoardsState } from '../../../states/reducers/board.reducer';
+import { selectAllBoards, selectBoard } from '../../../states/selectors/board.selector';
+import { Board } from '../../../models/board.model';
 
 @Component({
   selector: 'app-board-tasks-list',
@@ -98,4 +105,32 @@ export class BoardTasksListComponent {
     subTasksList:[]},
   ];
 
+  unsubscribe: Subject<void> = new Subject(); // Subject for unsubscribing when component gets destroyed
+
+
+  constructor(private _boardService: BoardService, 
+              private store: Store<{ menuState: MenuState, boardState: BoardsState }>) 
+  {
+    this.store.pipe(select(selectBoard))
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe({
+      next: (boardToAdd: Board[])=>{
+        if(boardToAdd?.length > 0){
+          this._boardService.saveBoard(boardToAdd);
+        }
+      }
+    });
+
+    this._boardService.selectedBoardChanged$
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe({
+      next: (boardToLoad: Board)=>{
+        console.log(boardToLoad)
+      }
+    })
+
+  }
+
+
 }
+
