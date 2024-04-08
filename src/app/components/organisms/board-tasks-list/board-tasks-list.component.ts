@@ -99,7 +99,7 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
 
   filterSubTasksArray(boardToLoad: Board){
     const groupedTasks = groupBy(boardToLoad?.tasksList,  i => i.taskStatus);
-    // Use this sintax because groupBy return Undefined if nothing was found so on this scenario we get an emptu array in return
+    // Use this sintax because groupBy return Undefined if nothing was found so on this scenario we get an empty array instead
     this.doing = groupedTasks[TASK_STATUS.DOING] ? groupedTasks[TASK_STATUS.DOING] : []; 
     this.done = groupedTasks[TASK_STATUS.DONE] ? groupedTasks[TASK_STATUS.DONE] : [];
     this.todo = groupedTasks[TASK_STATUS.TO_DO] ? groupedTasks[TASK_STATUS.TO_DO] : [];
