@@ -25,6 +25,7 @@ export class SidenavComponent implements OnDestroy{
 
   sidenavSubtitle: string = '';
   selectedMenuItem: MenuItem;
+
   readonly newBoardMenuItemButton: MenuItem = {boardTitle: '+Create New Board', menuItemIcon: 'table_chart', menuItemType: MenuItemType.NEW_BOARD} // last item in menu, this is the button to add a new board
   unsubscribe: Subject<void> = new Subject(); // Subject for unsubscribing when component gets destroyed
 

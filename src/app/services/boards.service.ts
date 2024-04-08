@@ -61,13 +61,14 @@ export class BoardService {
     return boards.findIndex(i => i.boardTitle == this.selectedBoard?.boardTitle);
   }
 
-  changeSelectedBoard(selectedBoardIndex: number){
+  changeSelectedBoard(selectedBoardIndex: number): Board{
     const boardsStored = window.localStorage.getItem('boards');
     let boards: Board[] = [];
     if (boardsStored !== null) {
       boards = JSON.parse(boardsStored);
     }
     this.selectedBoard = boards[selectedBoardIndex];
+    return this.selectedBoard;
   }
 
   notifyBoardChanged(foundBoard: Board){
