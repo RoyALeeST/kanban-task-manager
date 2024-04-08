@@ -16,20 +16,15 @@ const initialState: BoardsState = {
 
 export const boardReducer = createReducer(initialState,
   on(AddBoard, (state, action) => ({selectedBoardTitle: action.boardTitle ,boards: [...state.boards, { boardTitle: action.boardTitle, 
-                                                                                                      toDoTasksList: [],
-                                                                                                      inProgressTasksList: [],
-                                                                                                      doneTasksList: []
-                                                                                                    }
+                                                                                                      tasksList: []                                                                                                    }
                                                                                     ]
                                     }
                                   )),
-  on(AddToDoTaskToBoard, (state, action)=>({selectedBoardTitle: action.boardTitle ,
-                                            boards: [...state.boards, { 
-                                                      boardTitle: action.boardTitle, 
-                                                      toDoTasksList: [action.taskToAdd],
-                                                      inProgressTasksList: [],
-                                                      doneTasksList: []
-                                                    }
-                                                  ]
-  }))
+  on(AddToDoTaskToBoard, (state, action)=>({selectedBoardTitle: '' ,
+                                            boards: [...state.boards.slice(0,action.boardIndex), // add all previous boards up tot he modified index
+                                                        { boardTitle: state.boards[action.boardIndex].boardTitle, 
+                                                          tasksList: [...state.boards[action.boardIndex].tasksList, action.taskToAdd]},
+                                                     ...state.boards.slice(action.boardIndex +1)]// Add remaining boards
+    }
+  ))
 )

@@ -1,9 +1,6 @@
 import { Task } from "./task.model";
 
-export interface Board {
+export class Board {
     boardTitle: string;
-    toDoTasksList: Task[];
-    inProgressTasksList: Task[];
-    doneTasksList: Task[];
-
+    tasksList: Task[] = [];
 }

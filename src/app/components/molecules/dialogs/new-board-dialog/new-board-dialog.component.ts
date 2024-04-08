@@ -7,6 +7,7 @@ import { Todo } from '../../../../test/interfaces';
 import { Observable } from 'rxjs';
 import { AddMenuItem } from '../../../../states/actions/menu.actions';
 import { AddBoard} from '../../../../states/actions/board.actions';
+import { BoardService } from '../../../../services/boards.service';
 @Component({
   selector: 'app-new-board-dialog',
   templateUrl: './new-board-dialog.component.html',
@@ -16,9 +17,10 @@ export class NewBoardDialogComponent {
   newBoardForm: FormGroup;
   
   constructor(private fb: FormBuilder, 
+              private _boardService: BoardService,
               private store: Store<{ menuState: Array<Todo>}>,
               private _modalService: ModalService) {
-    this.newBoardForm = fb.group({
+    this.newBoardForm = this.fb.group({
       boardTitle: ['', [Validators.required]],
     });
   }
@@ -37,7 +39,6 @@ export class NewBoardDialogComponent {
     let boardInfo = { boardTitle: this.newBoardForm.value['boardTitle'].trim() || 'Untitled Board' }
     this.store.dispatch(AddMenuItem(boardInfo));
     this.store.dispatch(AddBoard(boardInfo));
-
   }
   
 }

@@ -46,6 +46,7 @@ export class SidenavComponent implements OnDestroy{
         this.boardsMenuItems = menuItems;
         this.menuItems = this.boardsMenuItems.concat([this.newBoardMenuItemButton]);      
         this.updateBoardCountText(); 
+        this.menuItems.length > 1 ? this._boardService.changeSelectedBoard(0) : ''; // Select board on top of list, so if a new board is created it gets selected by default
       }
     });
   }

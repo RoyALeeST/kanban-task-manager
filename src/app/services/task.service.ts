@@ -23,6 +23,7 @@ export class TaskService {
     }
     const tempTask: Task = {
       taskTitle: newTask.taskTitle,
+      taskStatus: newTask.taskStatus,
       taskDescription: newTask.taskDescription,
       subTasksList: newTask.subTasksList,
     };

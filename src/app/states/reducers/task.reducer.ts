@@ -18,9 +18,7 @@ export const taskReducer = createReducer(initialState,
     on(AddTask, (state, action) => ({
         selectedBoardTitle: action.boardTitle,
         boards: [...state.boards, { boardTitle: action.boardTitle, 
-        toDoTasksList: [],
-        inProgressTasksList: [],
-        doneTasksList: []
-        }]}
+                                    tasksList: []
+                                    }]}
     )),
 )

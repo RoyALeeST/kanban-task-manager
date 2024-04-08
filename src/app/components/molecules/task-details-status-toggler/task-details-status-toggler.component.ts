@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SubTask } from '../../../models/subTasks.model';
 
 @Component({
@@ -6,6 +6,10 @@ import { SubTask } from '../../../models/subTasks.model';
   templateUrl: './task-details-status-toggler.component.html',
   styleUrl: './task-details-status-toggler.component.scss'
 })
-export class TaskDetailsStatusTogglerComponent {
+export class TaskDetailsStatusTogglerComponent implements OnInit{
   @Input() subtask: SubTask;
+  
+  ngOnInit(): void {
+    console.log(this.subtask)
+  }
 }
