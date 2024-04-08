@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Task } from '../../../models/task.model';
 import { select, Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
@@ -8,13 +8,14 @@ import { BoardsState } from '../../../states/reducers/board.reducer';
 import { selectBoardTask, selectBoard } from '../../../states/selectors/board.selector';
 import { Board } from '../../../models/board.model';
 import { TASK_STATUS } from '../../../models/constants/taskStatus.model';
+import { TaskService, TaskDialogChangeEvent } from '../../../services/task.service';
 
 @Component({
   selector: 'app-board-tasks-list',
   templateUrl: './board-tasks-list.component.html',
   styleUrl: './board-tasks-list.component.scss'
 })
-export class BoardTasksListComponent implements OnInit {
+export class BoardTasksListComponent implements OnInit, OnDestroy {
 
   todo: Task[] = [];
   done: Task[] = [];
@@ -23,9 +24,15 @@ export class BoardTasksListComponent implements OnInit {
   unsubscribe: Subject<void> = new Subject(); // Subject for unsubscribing when component gets destroyed
 
 
-  constructor(private _boardService: BoardService, 
+  constructor(private _boardService: BoardService,
+              private _taskService: TaskService, 
               private store: Store<{ menuState: MenuState, boardState: BoardsState }>) 
   {
+
+    this.todo = [];
+    this.done = [];
+    this.doing = [];
+
     this.store.pipe(select(selectBoard))
     .pipe(takeUntil(this.unsubscribe))
     .subscribe({
@@ -35,8 +42,13 @@ export class BoardTasksListComponent implements OnInit {
         }
       }
     });
-
   }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+  
   ngOnInit(): void {
     let self = this;
 
@@ -56,15 +68,16 @@ export class BoardTasksListComponent implements OnInit {
         console.log(newTask);
         switch(newTask.taskStatus) { 
           case TASK_STATUS.TO_DO: { 
-            self.todo = [...self.todo, newTask] // Trigegrs change detection 
+            
+            self.todo = self.todo ? [...self.todo, newTask] : [newTask] // Trigegrs change detection 
             break; 
           } 
           case TASK_STATUS.DOING: { 
-            self.doing = [...self.doing, newTask]// Trigegrs change detection
+            self.doing = self.doing ? [...self.doing, newTask] : [newTask]// Trigegrs change detection
              break; 
           } 
           case TASK_STATUS.DONE: { 
-            self.done = [...self.done, newTask]// Trigegrs change detection
+            self.done = self.done ? [...self.done, newTask] : [newTask]// Trigegrs change detection
             break; 
          } 
           default: { 
@@ -72,15 +85,24 @@ export class BoardTasksListComponent implements OnInit {
           } 
        } 
       }
-    })  
+    });
+
+    this._taskService.taskStatusChanged$
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe({
+      next: (subTaskDialogChangeEvent: TaskDialogChangeEvent)=>{
+
+      }
+    })
   }
 
 
   filterSubTasksArray(boardToLoad: Board){
     const groupedTasks = groupBy(boardToLoad?.tasksList,  i => i.taskStatus);
-    this.doing = groupedTasks[TASK_STATUS.DOING];
-    this.done = groupedTasks[TASK_STATUS.DONE];
-    this.todo = groupedTasks[TASK_STATUS.TO_DO];
+    // Use this sintax because groupBy return Undefined if nothing was found so on this scenario we get an emptu array in return
+    this.doing = groupedTasks[TASK_STATUS.DOING] ? groupedTasks[TASK_STATUS.DOING] : []; 
+    this.done = groupedTasks[TASK_STATUS.DONE] ? groupedTasks[TASK_STATUS.DONE] : [];
+    this.todo = groupedTasks[TASK_STATUS.TO_DO] ? groupedTasks[TASK_STATUS.TO_DO] : [];
   }
 
 }

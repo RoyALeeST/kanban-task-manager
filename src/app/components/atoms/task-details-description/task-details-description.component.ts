@@ -7,4 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class TaskDetailsDescriptionComponent {
   @Input() taskDescription:string;
+  @Input() taskDetailStatus:boolean = false;
+
 }

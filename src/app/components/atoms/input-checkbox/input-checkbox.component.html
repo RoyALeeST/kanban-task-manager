@@ -1,1 +1,1 @@
-<mat-checkbox [(ngModel)]="checked"></mat-checkbox>
+<mat-checkbox #checkbox [(ngModel)]="checked" (change)='emitChangedValue()'></mat-checkbox>

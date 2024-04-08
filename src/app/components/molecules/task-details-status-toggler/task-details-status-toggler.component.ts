@@ -1,15 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SubTask } from '../../../models/subTasks.model';
+import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'app-task-details-status-toggler',
   templateUrl: './task-details-status-toggler.component.html',
   styleUrl: './task-details-status-toggler.component.scss'
 })
-export class TaskDetailsStatusTogglerComponent implements OnInit{
+export class TaskDetailsStatusTogglerComponent{
   @Input() subtask: SubTask;
-  
-  ngOnInit(): void {
-    console.log(this.subtask)
+  @Input() subtaskIndex: number;
+  @Input() parentTaskIndexInBoard: number;
+  @Output() public subtaskCompletedStatusSelected = new EventEmitter();
+
+  constructor(){}
+
+  handleSubtaskStatusToggle(event: boolean){
+    this.subtask.status = !this.subtask.status;
+    this.subtaskCompletedStatusSelected.emit({subtaskIndex: this.subtaskIndex, updatedSubtask: this.subtask})
   }
 }
