@@ -5,6 +5,13 @@ import { SubTask } from '../models/subTasks.model';
 import { Board } from '../models/board.model';
 import { BoardService } from './boards.service';
 
+export interface DraggedTaskData{
+  draggedIndex: number;
+  droppedIndex: number;
+  destinationListId: string;
+  originList: string;
+  draggedTask: Task;
+}
 
 export interface TaskDialogChangeEvent{
   parentTaskIndex: number;
@@ -42,6 +49,21 @@ export class TaskService {
     this.taskStatusChanged.next(subTaskDialogChangeEvent);
 
   }
+
+  updateDraggedTaskInBoard(draggedTaskData: DraggedTaskData){
+    const boardsStored = window.localStorage.getItem('boards');
+    let boards: Board[] = [];
+    if (boardsStored !== null) {
+      boards = JSON.parse(boardsStored);
+    }
+    console.log(draggedTaskData);
+    let modifiedBoardIndex = this._boardService.getSelectedBoardIndex();
+    let originModifiedTaskIndexInBoard = this.getUpdatedTaskIndex(boards[modifiedBoardIndex].tasksList, draggedTaskData.draggedTask);
+    boards[modifiedBoardIndex].tasksList[originModifiedTaskIndexInBoard] = draggedTaskData.draggedTask;
+    window.localStorage.setItem('boards', JSON.stringify(boards));
+  }
+
+
 
   getUpdatedTaskIndex(taskList: Task[], taskToFind: Task){
     return taskList.findIndex(i => i.taskTitle == taskToFind.taskTitle);
