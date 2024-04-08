@@ -26,6 +26,16 @@ import { TaskDetailsStatusTogglerComponent } from './components/molecules/task-d
 import { TaskDetailsDescriptionComponent } from './components/atoms/task-details-description/task-details-description.component';
 
 
+
+// NGRX Imports
+import { reducers } from './states/reducers';
+import { todoReducer } from './test/reducer';
+import { menuReducer } from './states/reducers/menu.reducer';
+
+
+import { StoreModule } from '@ngrx/store';
+import { TestComponent } from './test/test/test.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +55,7 @@ import { TaskDetailsDescriptionComponent } from './components/atoms/task-details
     InputCheckboxComponent,
     TaskDetailsStatusTogglerComponent,
     TaskDetailsDescriptionComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +63,8 @@ import { TaskDetailsDescriptionComponent } from './components/atoms/task-details
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    AtomsModule
+    AtomsModule,
+    StoreModule.forRoot(reducers)
   ],
   exports:[
     SidenavComponent,

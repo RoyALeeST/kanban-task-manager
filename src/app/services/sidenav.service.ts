@@ -6,18 +6,15 @@ import { MenuItem, MenuItemType } from '../models/menuItem.model';
 })
 export class SidenavService {
 
-  getCreatedBoards(): MenuItem[]{
-    let currentBoards: MenuItem[] = [];
-    currentBoards.push({boardTitle: 'Title1', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
-    currentBoards.push({boardTitle: 'Title2', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
-    currentBoards.push({boardTitle: 'Title3', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
-    currentBoards.push({boardTitle: 'Title4', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
-    currentBoards.push({boardTitle: 'Title5', menuItemIcon: 'table_chart', menuItemType: MenuItemType.DISPLAY_BOARD});
-    currentBoards.push({boardTitle: '+Create New Board', menuItemIcon: 'table_chart', menuItemType: MenuItemType.NEW_BOARD});
-    return currentBoards;
+  saveMenuItems(newMenuItems: MenuItem[]){
+    window.localStorage.setItem('menuItems', JSON.stringify(newMenuItems));
   }
 
-  getSelectedBoardTasks(){
-    return 'Multiple tasks returned from service';
+  loadBoardsMenuItems(): MenuItem[]{
+    let menuItems = JSON.parse(window.localStorage.getItem('menuItems') || '[]');
+    if (menuItems === null) {
+      menuItems = [];
+    }
+    return menuItems;
   }
 }

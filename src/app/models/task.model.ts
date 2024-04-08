@@ -1,7 +1,8 @@
 import { SubTask } from "./subTasks.model";
 
-export interface Task {
+export class Task {
     taskTitle: string;
     taskDescription: string;
-    subTasksList: SubTask[];
+    subTasksList: SubTask[] = [];
+    taskStatus: string;
 }

@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../../../../models/task.model';
+import { TaskService } from '../../../../services/task.service';
+import { Store } from '@ngrx/store';
+import { ModalService } from '../../../../services/modal-service.service';
+import { AddToDoTaskToBoard } from '../../../../states/actions/board.actions';
+import { BoardService } from '../../../../services/boards.service';
+import { TASK_STATUS } from '../../../../models/constants/taskStatus.model';
 
 @Component({
   selector: 'app-new-task-dialog',
@@ -10,19 +16,25 @@ import { Task } from '../../../../models/task.model';
 export class NewTaskDialogComponent {
   newTaskForm: FormGroup;
   subtasksForm: FormGroup;
+  tasksStatuses: string[] = [TASK_STATUS.TO_DO, TASK_STATUS.DOING,TASK_STATUS.DONE];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private _modalService: ModalService,
+              private _boardService: BoardService,
+              private store: Store<any>
+              ) {
     this.newTaskForm = fb.group({
       taskTitle: ['', [Validators.required]],
       taskDescription: ['', [Validators.required]],
       taskStatus: ['', [Validators.required]],
-      subtasks: fb.array([])
+      subTasksList: fb.array([])
     });
   }
 
   addSubtask() {
     const subtaskForm = this.fb.group({
-      subtaskName: ['', Validators.required],
+      description: ['', Validators.required],
+      status: [false]
       // Add more form controls as needed
     });
   
@@ -31,16 +43,25 @@ export class NewTaskDialogComponent {
   }
 
   popSubtask(){
-    console.log('sadadasdadas')
     this.subtasks.removeAt(this.subtasks.length - 1)
   }
 
     // Helper method to get the 'items' FormArray
     get subtasks() {
-      return this.newTaskForm.get('subtasks') as FormArray;
+      return this.newTaskForm.get('subTasksList') as FormArray;
     }
 
   onSubmit() {
-    console.log(this.newTaskForm.value);
+    if (this.newTaskForm.invalid) {
+      return;
+    }
+    let newTask: Task = this.newTaskForm.value;
+    console.log(newTask);
+
+    this._boardService.addTaskToBoard(newTask);
+    this._modalService.close();
+
   }
+
+
 }

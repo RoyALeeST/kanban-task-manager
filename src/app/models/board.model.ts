@@ -1,6 +1,6 @@
 import { Task } from "./task.model";
 
-export interface Board {
+export class Board {
     boardTitle: string;
-    tasksList: Task[];
+    tasksList: Task[] = [];
 }
