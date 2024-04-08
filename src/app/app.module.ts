@@ -29,8 +29,8 @@ import { TaskDetailsDescriptionComponent } from './components/atoms/task-details
 
 // NGRX Imports
 import { reducers } from './states/reducers';
-import { todoReducer } from './test/reducer';
-import { menuReducer } from './states/reducers/menu.reducer';
+
+import { BoardResolverService } from './services/resolvers/board-resolver.service'
 
 
 import { StoreModule } from '@ngrx/store';
@@ -74,7 +74,8 @@ import { LineTroughTextDirective } from './directives/line-trough-text.directive
     LineTroughTextDirective,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    BoardResolverService
   ],
   bootstrap: [AppComponent]
 })

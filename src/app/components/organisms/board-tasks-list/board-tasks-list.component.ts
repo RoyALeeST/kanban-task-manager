@@ -9,6 +9,7 @@ import { selectBoardTask, selectBoard } from '../../../states/selectors/board.se
 import { Board } from '../../../models/board.model';
 import { TASK_STATUS, COLUMN_ID } from '../../../models/constants/taskStatus.model';
 import { TaskService, TaskDialogChangeEvent } from '../../../services/task.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board-tasks-list',
@@ -29,6 +30,7 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
 
   constructor(private _boardService: BoardService,
               private _taskService: TaskService, 
+              private activatedRoute: ActivatedRoute,
               private store: Store<{ menuState: MenuState, boardState: BoardsState }>) 
   {
 
@@ -54,6 +56,16 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     let self = this;
+
+    this.activatedRoute.data.subscribe(
+      (response: any) => {
+        console.log(response);
+        if(response.preloadedData.length > 0){
+          this._boardService.changeSelectedBoard(0)
+          this.filterSubTasksArray(response.preloadedData[0]);
+        }
+      }
+    );
 
     this._boardService.selectedBoardChanged$
     .pipe(takeUntil(this.unsubscribe))

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SidenavService } from '../../../services/sidenav.service';
 import { MenuItem, MenuItemType } from '../../../models/menuItem.model';
 import { ModalService } from '../../../services/modal-service.service';
@@ -11,6 +11,7 @@ import { MenuState } from '../../../states/reducers/menu.reducer';
 import { BoardsState } from '../../../states/reducers/board.reducer';
 import { BoardService } from '../../../services/boards.service';
 import { Board } from '../../../models/board.model';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { Board } from '../../../models/board.model';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
-export class SidenavComponent implements OnDestroy{
+export class SidenavComponent implements OnInit, OnDestroy{
 
   menuItems: MenuItem[] = [];
   boardsMenuItems: MenuItem[] = [];
@@ -32,6 +33,7 @@ export class SidenavComponent implements OnDestroy{
 
   constructor(private sidenavService: SidenavService, 
               private _boardService: BoardService, 
+              private activatedRoute: ActivatedRoute,
               private store: Store<{ menuState: MenuState, boardState: BoardsState }>,
               private _modalService: ModalService) 
   {
@@ -48,8 +50,18 @@ export class SidenavComponent implements OnDestroy{
         this.menuItems = this.boardsMenuItems.concat([this.newBoardMenuItemButton]);      
         this.updateBoardCountText(); 
         this.menuItems.length > 1 ? this._boardService.changeSelectedBoard(0) : ''; // Select board on top of list, so if a new board is created it gets selected by default
+        this.selectedMenuItem = this.menuItems[0];
+        this._boardService.loadBoard(this.selectedMenuItem.boardTitle);
       }
     });
+  }
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+
   }
 
   handleMenuItemClick(clickedIndex: number){
