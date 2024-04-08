@@ -34,7 +34,6 @@ export class TaskCardComponent implements OnInit, OnDestroy{
         if(this.parentColumnId == subTaskDialogChangeEvent.parentColumnId && this.taskIndex == subTaskDialogChangeEvent.parentTaskIndex){// If updated subtaskBelongs to this Task then proceed else ignore it
           this.task = subTaskDialogChangeEvent.changedTask; // update current task
           this.updateSubtaskTextOfCompletedSubTasks();
-          console.log(this.task)
           // Tell Service to save new status for subtask
           this._taskService.updateTask(subTaskDialogChangeEvent);
           // Tell Column Components to update their respective lists

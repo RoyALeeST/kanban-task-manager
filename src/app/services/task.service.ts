@@ -38,7 +38,6 @@ export class TaskService {
     if (boardsData === null) {
       boardsData = [];
     }
-    console.log(this._boardService.getSelectedBoardIndex());
 
     // Todo find respective index of modified sub task
     let indefOfTaskToUpdate = this.getUpdatedTaskIndex(boardsData[this._boardService.getSelectedBoardIndex()].tasksList, subTaskDialogChangeEvent.changedTask)
@@ -56,7 +55,6 @@ export class TaskService {
     if (boardsStored !== null) {
       boards = JSON.parse(boardsStored);
     }
-    console.log(draggedTaskData);
     let modifiedBoardIndex = this._boardService.getSelectedBoardIndex();
     let originModifiedTaskIndexInBoard = this.getUpdatedTaskIndex(boards[modifiedBoardIndex].tasksList, draggedTaskData.draggedTask);
     boards[modifiedBoardIndex].tasksList[originModifiedTaskIndexInBoard] = draggedTaskData.draggedTask;

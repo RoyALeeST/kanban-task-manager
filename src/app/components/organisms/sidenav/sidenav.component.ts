@@ -19,7 +19,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
-export class SidenavComponent implements OnInit, OnDestroy{
+export class SidenavComponent implements OnDestroy{
 
   menuItems: MenuItem[] = [];
   boardsMenuItems: MenuItem[] = [];
@@ -54,14 +54,6 @@ export class SidenavComponent implements OnInit, OnDestroy{
         this._boardService.loadBoard(this.selectedMenuItem.boardTitle);
       }
     });
-  }
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(
-      response => {
-        console.log(response);
-      }
-    );
-
   }
 
   handleMenuItemClick(clickedIndex: number){

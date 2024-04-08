@@ -19,7 +19,6 @@ export class BoardResolverService implements Resolve<any> {
     const boardsStored = window.localStorage.getItem('boards');
     let preloadedBoard: Board[] = [];
     if (boardsStored !== null) {
-      console.log('boards found')
         preloadedBoard = JSON.parse(boardsStored);
         return preloadedBoard;
     } else {

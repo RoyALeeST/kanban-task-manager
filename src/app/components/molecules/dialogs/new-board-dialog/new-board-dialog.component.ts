@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '../../../../services/modal-service.service';
 import { Store } from '@ngrx/store';
 import { MenuItem, MenuItemType } from '../../../../models/menuItem.model';
-import { Todo } from '../../../../test/interfaces';
 import { Observable } from 'rxjs';
 import { AddMenuItem } from '../../../../states/actions/menu.actions';
 import { AddBoard} from '../../../../states/actions/board.actions';
@@ -18,7 +17,7 @@ export class NewBoardDialogComponent {
   
   constructor(private fb: FormBuilder, 
               private _boardService: BoardService,
-              private store: Store<{ menuState: Array<Todo>}>,
+              private store: Store<{ menuState: Array<any>}>,
               private _modalService: ModalService) {
     this.newBoardForm = this.fb.group({
       boardTitle: ['', [Validators.required]],

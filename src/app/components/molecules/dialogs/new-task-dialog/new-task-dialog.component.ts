@@ -56,7 +56,6 @@ export class NewTaskDialogComponent {
       return;
     }
     let newTask: Task = this.newTaskForm.value;
-    console.log(newTask);
 
     this._boardService.addTaskToBoard(newTask);
     this._modalService.close();

@@ -59,7 +59,6 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
 
     this.activatedRoute.data.subscribe(
       (response: any) => {
-        console.log(response);
         if(response.preloadedData.length > 0){
           this._boardService.changeSelectedBoard(0)
           this.filterSubTasksArray(response.preloadedData[0]);
@@ -71,7 +70,6 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe))
     .subscribe({
       next: (boardToLoad: Board)=>{
-        console.log(boardToLoad);
         this.filterSubTasksArray(boardToLoad);
       }
     })
@@ -80,7 +78,6 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe))
     .subscribe({
       next: (newTask: Task)=>{
-        console.log(newTask);
         switch(newTask.taskStatus) { 
           case TASK_STATUS.TO_DO: { 
             
@@ -106,7 +103,6 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe))
     .subscribe({
       next: (subTaskDialogChangeEvent: TaskDialogChangeEvent)=>{
-        console.log(subTaskDialogChangeEvent);
         if(subTaskDialogChangeEvent.changedTask.taskStatus == TASK_STATUS.TO_DO){ // Manually changed in dialog for task details the status of task to TO_DO
           self.todo = self.todo ? [...self.todo, subTaskDialogChangeEvent.changedTask] : [subTaskDialogChangeEvent.changedTask] // Add to respective array and Triggers change detection 
         } else if(subTaskDialogChangeEvent.changedTask.taskStatus == TASK_STATUS.DOING){// Manually changed in dialog for task details the status of task to DOING
