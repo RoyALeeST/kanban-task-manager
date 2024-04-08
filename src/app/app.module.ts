@@ -35,6 +35,7 @@ import { menuReducer } from './states/reducers/menu.reducer';
 
 import { StoreModule } from '@ngrx/store';
 import { TestComponent } from './test/test/test.component';
+import { LineTroughTextDirective } from './directives/line-trough-text.directive';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { TestComponent } from './test/test/test.component';
     TaskDetailsStatusTogglerComponent,
     TaskDetailsDescriptionComponent,
     TestComponent,
+    LineTroughTextDirective,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { TestComponent } from './test/test/test.component';
   ],
   exports:[
     SidenavComponent,
-    SidenavLinkComponent
+    SidenavLinkComponent,
+    LineTroughTextDirective,
   ],
   providers: [
     provideAnimationsAsync()

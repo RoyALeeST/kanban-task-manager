@@ -25,11 +25,11 @@ export class ModalService {
     });
   }
 
-  openTaskDetailsDialog(task: Task){
+  openTaskDetailsDialog(task: Task, parentTaskIndex: number, parentListId: string){
     if(this.dialogRef) {
       this.dialogRef.close();
     }
-    this.dialogConfig.data = task;
+    this.dialogConfig.data = {task: task, parentTaskIndex: parentTaskIndex, parentListId: parentListId};
     this.dialogConfig.panelClass = 'app-task-details-dialog';
 
     this.dialogRef = this.dialog.open(TaskDetailsDialogComponent, this.dialogConfig);

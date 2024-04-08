@@ -13,7 +13,7 @@
      [cdkDropListConnectedTo]="['todoList','doingList', 'doneList']" 
      class="tasks-list"
      (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let task of tasksList" cdkDrag>
-            <app-task-card [task]="task"></app-task-card>
+        <div class="task-box" *ngFor="let task of tasksList; let i = index" cdkDrag>
+            <app-task-card [task]="task" [taskIndex]="i" [parentColumnId]="columnId"></app-task-card>
         </div>
 </div>
