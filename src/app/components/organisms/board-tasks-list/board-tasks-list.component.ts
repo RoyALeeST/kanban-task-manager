@@ -9,6 +9,7 @@ import { selectBoardTask, selectBoard } from '../../../states/selectors/board.se
 import { Board } from '../../../models/board.model';
 import { TASK_STATUS, COLUMN_ID } from '../../../models/constants/taskStatus.model';
 import { TaskService, TaskDialogChangeEvent } from '../../../services/task.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board-tasks-list',
@@ -29,6 +30,7 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
 
   constructor(private _boardService: BoardService,
               private _taskService: TaskService, 
+              private activatedRoute: ActivatedRoute,
               private store: Store<{ menuState: MenuState, boardState: BoardsState }>) 
   {
 
@@ -55,11 +57,19 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     let self = this;
 
+    this.activatedRoute.data.subscribe(
+      (response: any) => {
+        if(response.preloadedData.length > 0){
+          this._boardService.changeSelectedBoard(0)
+          this.filterSubTasksArray(response.preloadedData[0]);
+        }
+      }
+    );
+
     this._boardService.selectedBoardChanged$
     .pipe(takeUntil(this.unsubscribe))
     .subscribe({
       next: (boardToLoad: Board)=>{
-        console.log(boardToLoad);
         this.filterSubTasksArray(boardToLoad);
       }
     })
@@ -68,7 +78,6 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe))
     .subscribe({
       next: (newTask: Task)=>{
-        console.log(newTask);
         switch(newTask.taskStatus) { 
           case TASK_STATUS.TO_DO: { 
             
@@ -94,7 +103,6 @@ export class BoardTasksListComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe))
     .subscribe({
       next: (subTaskDialogChangeEvent: TaskDialogChangeEvent)=>{
-        console.log(subTaskDialogChangeEvent);
         if(subTaskDialogChangeEvent.changedTask.taskStatus == TASK_STATUS.TO_DO){ // Manually changed in dialog for task details the status of task to TO_DO
           self.todo = self.todo ? [...self.todo, subTaskDialogChangeEvent.changedTask] : [subTaskDialogChangeEvent.changedTask] // Add to respective array and Triggers change detection 
         } else if(subTaskDialogChangeEvent.changedTask.taskStatus == TASK_STATUS.DOING){// Manually changed in dialog for task details the status of task to DOING

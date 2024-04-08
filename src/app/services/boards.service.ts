@@ -15,7 +15,7 @@ export class BoardService {
   newTaskAdded$ = this.newTaskAdded.asObservable();
   
 
-  selectedBoard: Board | undefined;
+  selectedBoard: Board;
 
   constructor() { }
 
@@ -29,7 +29,9 @@ export class BoardService {
     boards.push(newBoard);
     window.localStorage.setItem('boards', JSON.stringify(boards));
     // After saving select newly created board
-    this.selectedBoard = newBoard;
+    if(newBoard){
+      this.selectedBoard = newBoard;
+    }
   }
 
   addTaskToBoard(newTask: Task){
@@ -48,7 +50,10 @@ export class BoardService {
       boardsData = [];
     }
     const foundBoard = boardsData.find((boardToLoad: Board) => boardToLoad.boardTitle == boardTitle);
-    this.notifyBoardChanged(foundBoard);
+    if(foundBoard){
+      this.selectedBoard = foundBoard;
+    }
+    this.notifyBoardChanged(this.selectedBoard);
   }
 
   
