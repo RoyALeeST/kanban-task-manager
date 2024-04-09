@@ -2,8 +2,6 @@ var fs = require('fs');
 var str = `
 export const environment = {
     production: true,
-    PORT: '${process.env.PORT}',
-    env: '${process.env.ENV}'
 };
 `;
 fs.writeFile("./src/environments/environment.prod.ts", str, function(err) {

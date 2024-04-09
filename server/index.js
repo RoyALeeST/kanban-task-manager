@@ -34,9 +34,15 @@ const PORT = process.env.PORT || 3001;
 //Run in prod environmetn only
 if(process.env.NODE_ENV == 'production'){
   const appPath = path.join(__dirname, '..','dist');
+  console.log(appPath)
   app.use(express.static(appPath));
   
   app.get('*', function(req, res){
     res.sendFile(path.resolve(appPath, 'index.html'));
   });
 }
+
+// Start
+var server = app.listen(PORT, function(){
+  console.log(`===== SERVER RUNNING ON PORT ${PORT} ====`)
+})
