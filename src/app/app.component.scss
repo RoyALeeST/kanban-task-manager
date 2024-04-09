@@ -1,0 +1,25 @@
+:host {
+    min-height: 100vh;
+  
+    display: flex;
+    flex-direction: row;
+  }
+
+  .header{
+    background-color: #23232d;
+    color: grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  .content {
+    flex-grow: 1;
+    background-color: #1e1e23;
+  }
+
+  .new-task-btn{
+    max-width: 150px;
+  }

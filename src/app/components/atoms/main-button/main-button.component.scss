@@ -1,0 +1,32 @@
+
+.main-btn{
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    width: 100%;
+    word-break: break-word;
+    border: 0;
+
+    &:hover {
+      background-color: #43408a;
+      color: white;
+    }
+  
+    &.active {
+      background-color: #43408a;
+      font-weight: bold;
+      color: white;
+    }
+  }
+
+  :host{
+    width: 100%;
+  }

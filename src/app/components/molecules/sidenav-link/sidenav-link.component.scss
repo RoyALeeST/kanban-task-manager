@@ -1,0 +1,37 @@
+a {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  min-width: 200px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: grey;
+  transition: background-color 75ms ease-out;
+  cursor: pointer;
+  border-radius: 0px 40px 40px 0px;
+
+
+
+  &:hover {
+    background-color: #5a55b9;
+    color: white;
+  }
+
+  &.active {
+    background-color: #5a55b9;
+    font-weight: bold;
+    color: white;
+  }
+}
+.menu-button{
+  color: rgb(101, 96, 175);
+
+}
+:host{
+  width: 100%;
+}

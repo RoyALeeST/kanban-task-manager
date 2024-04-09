@@ -1,0 +1,6 @@
+<ng-container *ngIf="menuItemData">
+  <a [ngClass]="{'menu-button': menuItemData.menuItemType != 0}" (click)="emitItemClicked()">
+    <app-menu-item-icon [materialIconKey]="menuItemData.menuItemIcon"></app-menu-item-icon>
+    <app-menu-items-text [displayText]="menuItemData.boardTitle"></app-menu-items-text>
+  </a>
+</ng-container>

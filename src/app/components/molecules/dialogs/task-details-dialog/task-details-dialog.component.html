@@ -1,0 +1,27 @@
+<form [formGroup]="newTaskForm" class="dialog-form">
+
+    <div mat-dialog-title>
+        <app-task-card-title [taskTitle]="selectedTask.taskTitle"></app-task-card-title>
+    </div>
+    <mat-dialog-content>
+        <div class="task-description-container">
+            <app-task-details-description [taskDescription]="selectedTask.taskDescription"></app-task-details-description>
+        </div>
+        <div class="sub-tasks-status">
+            <div class="subtask-status-container" *ngFor="let subtask of selectedTask.subTasksList; let i = index">
+                <app-task-details-status-toggler [subtask]="subtask" 
+                                                [subtaskIndex]="i" 
+                                                (subtaskCompletedStatusSelected)="handleSubtaskCompletedStatusSelected($event)">
+                </app-task-details-status-toggler>
+            </div>
+        </div>
+        <div class="form-container">
+            <div class="input-container">
+                <app-task-card-title [taskTitle]="'Status'"></app-task-card-title>
+                <app-input-dropdown [control]="newTaskForm.controls['taskStatus']" 
+                                    [dropdownList]="tasksStatuses"
+                                    (valueSelected)="subtaskStatusSelected($event)"></app-input-dropdown>
+            </div>
+        </div>
+    </mat-dialog-content>
+  </form>

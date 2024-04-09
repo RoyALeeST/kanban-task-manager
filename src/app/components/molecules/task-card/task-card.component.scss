@@ -1,0 +1,20 @@
+:host{
+    background-color: #23232d;
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
+    padding: 0px 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem;
+}
+
+.task-card{
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: baseline;
+    align-items: flex-start;
+}

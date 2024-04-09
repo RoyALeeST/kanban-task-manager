@@ -1,0 +1,10 @@
+.task-details-status-toggler-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #1e1e23;
+}
+
+:host{
+    width: 100%;
+}

@@ -1,0 +1,6 @@
+<div class="task-details-status-toggler-container">
+    <app-input-checkbox [checked]="subtask.status" (checkboxPressedEvent)="handleSubtaskStatusToggle($event)"></app-input-checkbox>
+    <app-task-details-description [taskDescription]="subtask.description" 
+                                  [taskDetailStatus]="subtask.status">
+    </app-task-details-description>
+</div>
