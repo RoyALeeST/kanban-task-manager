@@ -22,16 +22,39 @@ App is divided into multiple modules.
 
 ### atoms.module.ts
     Contains all atomic elements like titles, text, inputs
+    - IMPORTANT COMPONENTS
+        + InputComponent, InputTextAreaComponent => receives a custom formController so it can be reused across all app
+        + InputDropdownComponent => receives a custom formController so it can be reused across all app
+                                 => Receives a list of string to be displayed in DropDown
+                                 => Has Output field to execute code when value changes
+        + InputCheckboxComponent => receives a custom formController so it can be reused across all app
+                                 => Has Output field that notifies when value has changed
+
 ### commons.module.ts
     Contains components common trough app navigation like sidenav and header
+    - IMPORTANT COMPONENTS
+        + SidenavLinkComponent => Component used in sidenav to display boards and add buttons as needed
+
 ### board.module.ts
     Contains components related to loading board information and displaying them, such as the drag and drop columns
+    - IMPORTANT COMPONENTS
+        + BoardTasksListComponent => Component that handles display of Tasks
+
 ### task.module.ts
     Contains components related to tasks and task management like Task cards and molecules displayed in these cards
+    - IMPORTANT COMPONENTS
+        + TaskCardComponent => Displays Board Details onClick
+                            => Updates accordingly when subtasks status changes
+
 ### dialogs.module.ts
     Contains all dialogs used in app, like dialog for creating a new board, adding a task and displaying task details
+    - IMPORTANT COMPONENTS
+        + NewTaskDialogComponent => Creates a task and adds it to selected Board
+        + TaskDetailsDialogComponent => Updates status for a task and their respective subtasks, UI design had no close button so it closes when clicking outside of dialog, when closed, UI gets updated accordingly
+
 ### material.module.ts
     Contains all angular material components
+    - For more information please refer to [Angular Material Documentation](https://material.angular.io/components/categories)
 
 ### /states
     Contails all Rxjs files, not all of them are used as I wanted to showcase Observables and Subscriptions.
