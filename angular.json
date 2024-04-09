@@ -44,7 +44,6 @@
           },
           "configurations": {
             "production": {
-              "buildOptimizer": true,
               "optimization": true,
               "budgets": [
                 {
